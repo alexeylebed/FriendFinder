@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friend Finder</title>
+</head>
+<body>
+<style>
+    body{
+        font-family: 'Raleway', sans-serif;  
+        margin: 0;
+        padding: 0;
+    }
+
+    header{
+        width: 100%;
+        height: 200px;
+        background-color: #006CCE;
+    }
+
+    .progname{
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        padding-top: 90px;
+        font-size: 28px;
+        color: white;
+    }
+    .container{
+        width: 960px;
+        margin:auto;
+        font-size: 24px;
+    }
+
+    .statheader{
+        margin-top: 40px;
+        font-size: 30px;
+        color: #607D8B;
+    }
+
+    .parentHeader, .parentString{
+        display: flex;
+        justify-content: space-between;
+        background-color: lightblue;
+        margin-top: 10px;
+
+    }
+
+    .parentString{
+        background-color: white;
+    }
+
+    .confirm{
+        height: 50px;
+        width: 200px;
+        border-radius: 5px;
+        color: white;
+        text-transform: uppercase;
+        background-color: #006CCE;
+        margin: 20px 0 20px 0;
+        outline: none;
+        font-size: 20px;
+    }
+
+    .input{
+    display: block;
+    outline: none;
+    border: none;
+    height: 60px;
+    width: 380px;
+    border-bottom: 1px solid #006CCE;
+    font-family: 'Raleway', sans-serif;  
+    font-size: 24px;
+    }
+
+    .input::placeholder{
+        font-family: 'Raleway', sans-serif;  
+        font-size: 24px;
+    }
+
+    .input:focus{
+        font-family: 'Raleway', sans-serif;  
+        font-size: 24px;
+        border-bottom: 2px solid #006CCE;
+    }
+    .statheader{
+        margin-bottom: 40px;
+    }
+    .ifChecked{
+        width: 20px;
+        height: 20px;
+    }
+    .answers{
+        display: flex;
+    }
+    .answer{
+        margin: 10px
+    }
+    #back{
+        display: block;
+    }
+    #uploadphoto{
+        display:block;
+        margin: 20px 0 20px 0
+    }
+    #error{
+        color: #EB5757;
+        margin: 10px 0 10px 0;
+        display: none;
+    }
+    
+    .match{
+        position: relative;
+        margin: 20px 0 20px 0;
+        height: 250px;
+    }
+    .matchphoto{
+        height: 200px;
+    }
+  
+    #userAvatar{
+        width: 100%;
+        display: block;
+        /* border-radius: 100%; */  
+    }
+    #boyfriend_title{
+        margin-bottom: 20px;
+    }
+    #boyfriend_photo{
+        left: 150px;
+    }
+    #newUser_photo{
+        margin-left: 20px;
+    }
+
+
+</style>
+<header>
+    <div class="progname">
+        Friend Finder
+    </div>
+</header>
+<div class = "container">
+    <section class=newReservation>
+        <div  id = 'pageHeader' class='statheader'>Complete the survey to get new friends</div>
+        <div id = '1'>
+            <div class ='question'>Provide your details. Step 1.</div>
+            <div class ='question'> What is your name?</div>
+            <input type="text" id="1_1" class = 'input' placeholder = "Type your name here">
+            <button class = 'confirm' id = 'confirm_1'>Next</button>
+        </div> 
+        <div id = 'photo'>
+            <div class ='question'>Provide your details. Step 2.</div>
+            <div class ='question'> Please upload your avatar</div>
+            <input id = 'uploadphoto' type="file" onchange = "onFileSelected(event)">
+            <div id = 'photoParent'></div>
+            <button class = 'confirm' id = 'confirm_photo'>Next</button>         
+        </div>
+        <div id = '2'>
+            <div class ='question' id = 'numberOfQuestion'></div>
+            <div class ='question' id = 'questionText'></div>
+            <div class = 'answers'>
+                <div class = 'answer' id = answer_2_1>
+                    <img src="./assets/radiooff.svg" id="img_2_1" class = 'ifChecked'>
+                    <span class = 'answerText' id = 'answer_text_2_1' ></span>
+                </div>
+                <div class = 'answer' id = answer_2_2>
+                    <img src="./assets/radiooff.svg" id="img_2_2" class = 'ifChecked'>
+                    <span class = 'answerText' id = 'answer_text_2_2' ></span>
+                </div>
+                <div class = 'answer' id = answer_2_3>
+                    <img src="./assets/radiooff.svg" id="img_2_3" class = 'ifChecked'>
+                    <span class = 'answerText' id = 'answer_text_2_3' ></span>
+                </div>
+                <div class = 'answer' id = answer_2_4>
+                    <img src="./assets/radiooff.svg" id="img_2_4" class = 'ifChecked'>
+                    <span class = 'answerText' id = 'answer_text_2_4' ></span>
+                </div>
+                <div class = 'answer' id = answer_2_5>
+                    <img src="./assets/radiooff.svg" id="img_2_5" class = 'ifChecked'>
+                    <span class = 'answerText' id = 'answer_text_2_5' ></span>
+                </div>
+            </div>
+            <div id = 'error'>Please select the answer</div>
+            <button class = 'confirm'  id = 'confirm_2'>Next</button>
+        </div> 
+        <div class = 'thirdblock' id = '3'> 
+            <div id = 'match'>
+                <div id= 'boyfriend_title'>Your best friend is John!</div>
+            </div>
+            <button class = 'confirm'  id = 'back'>Start over</button>
+        </div>
+
+    </section>           
+</div>
+</body>
+<script>
+    //Default display settings 
+    let block1 = document.getElementById('1');
+    let block2 = document.getElementById('2');
+    let block3 = document.getElementById('3');
+    let blockPhoto = document.getElementById('photo');
+    let pageHeader = document.getElementById('pageHeader');
+    let bestFriend = document.getElementById('boyfriend_title');
+    block2.style.display = 'none'
+    block3.style.display = 'none'
+    blockPhoto.style.display = 'none'
+
+
+    //Output
+    let userAnswers = {name: '' , scores: [] , photo: ''};
+
+    
+    //Block 1 -  question 1
+    const button1 = document.getElementById('confirm_1');
+
+    //Block photo
+    const buttonPhoto = document.getElementById('confirm_photo');
+
+    //Block 2 -chechBox-questions[2-10]
+    const button2 = document.getElementById('confirm_2');
+    let checkBoxArr = [];
+    let lastClickedId;
+    const checkBoxes = document.getElementsByClassName('answerText');
+    const numberOfQuestion = document.getElementById('numberOfQuestion');
+    const questionText = document.getElementById('questionText');
+
+    //Config for block 2
+    const config = {
+        questionTitle:['Question1' , 'Question2' , 'Question3', 'Question4' , 'Question5' , 'Question6', 'Question7' , 'Question8' , 'Question9'],
+        questionText: ['Describe the quality of your body' , 'Do you like sports?' , 'How clever are you?' , 'Are you sexy?' , 'Do you beleive in god?' , 'Do you want to go to Paris on vacation?', 'Do you love Oprah?' , 'Do you like expensive cars?' , 'Do you like bars/pubs?'],
+        choises: [1,2,3,4,5]
+    }
+    const questionsMaxIndex = config.questionTitle.length;
+    const choicesIndex = config.choises.length;
+
+
+    let questionIndex = 0;
+    function render(){
+        let answersIndex = 0;
+        numberOfQuestion.innerHTML = config.questionTitle[questionIndex];
+        questionText.innerHTML = config.questionText[questionIndex];
+        [...checkBoxes].forEach((item) =>{
+            item.innerHTML = config.choises[answersIndex];
+            answersIndex++;
+        })
+        questionIndex++;
+    }
+
+    function getAnswer(){
+        let index = 0;
+        let images = document.getElementsByClassName('ifChecked');
+        [...images].forEach((item) => {
+            if(item.getAttribute('src') == './assets/radioon.svg'){
+                userAnswers.scores.push(item.id.split('_')[2])
+                return item.id.split('_')[2]
+            }
+        })
+    }  
+
+    function ifChecked(){
+        let images = document.getElementsByClassName('ifChecked');
+        let matchIndex = 0;
+        let errorMessage = document.getElementById('error');
+        [...images].forEach((item) => {
+            if(item.getAttribute('src') == './assets/radioon.svg'){
+                console.log('match')
+                matchIndex++;
+            } else {
+                console.log('not match')
+            }
+        })
+        if(matchIndex >0){
+            errorMessage.style.display = 'none';
+            return true
+        } else {
+            errorMessage.style.display = 'block';
+            return false
+        }
+    }
+
+    function onFileSelected(event){
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+        var photo = document.getElementById('photoParent');
+
+        var imgtag = document.createElement('img');
+        imgtag.title = selectedFile.name;
+        reader.onload = function(event){
+            
+            console.log(event)
+            photo.style.height = '200px';
+            photo.style.width = '200px';
+            photo.style.overflow = 'hidden';
+            
+            imgtag.src = event.target.result;
+            imgtag.style.display = 'block';
+            imgtag.setAttribute('id' , 'userAvatar')
+            photo.append(imgtag);
+
+            userAnswers.photo = event.target.result;
+        }
+
+        reader.readAsDataURL(selectedFile);
+        //console.log(selectedFile)
+
+    }
+
+    function checkBoxClear(){
+        let img;
+        let id;
+        for(i = 1; i <= questionsMaxIndex; i ++){
+            for(j = 1; j <= choicesIndex; j++ ){
+                id = 'img_' + i + '_' + j;
+                 img = document.getElementById(id)
+                 if(img != null){
+                    img.setAttribute('src' , './assets/radiooff.svg' )
+                 }
+            }
+        }
+    }
+
+    function renderPhotos(imgsrc){
+        let parent = document.getElementById('match');
+        let imgBoyfriend = document.createElement('img');
+        let imgYou = document.createElement('img');
+
+        imgBoyfriend.setAttribute('src' , imgsrc);
+        imgBoyfriend.className = 'matchphoto';
+        imgBoyfriend.id = 'boyfriend_photo';
+        parent.append(imgBoyfriend);
+
+        imgYou.setAttribute('src' , userAnswers.photo);
+        imgYou.className = 'matchphoto';
+        imgYou.id = 'newUser_photo';
+        parent.append(imgYou);
+
+    }
+
+    [...checkBoxes].forEach((item) =>{
+        item.addEventListener('click' , (e) => {
+            checkBoxClear();
+            let addressArr =  e.target.id.split('_');
+            let id = 'img_' + addressArr[2] + '_' + addressArr[3];
+            let img = document.getElementById(id);
+            img.setAttribute('src' , './assets/radioon.svg' )
+         })
+    })
+
+    button1.addEventListener('click' , (e)=>{
+        block1.style.display = 'none'
+        blockPhoto.style.display = 'block'
+
+    })
+
+    buttonPhoto.addEventListener('click' , (e)=>{
+        blockPhoto.style.display = 'none'
+        block2.style.display = 'block'
+        let userName = document.getElementById('1_1').value;
+        userAnswers.name = userName;
+        render();
+    })
+
+    button2.addEventListener('click' , (e) =>{
+        if(ifChecked()){
+            run();
+        }
+    })
+
+    function getBestFriend(data){
+        data = JSON.stringify(data);
+        console.log(data);
+        //'https://friendfinderalexeylebed.herokuapp.com/addcharacter'
+        //'http://localhost:3000/addcharacter'
+        fetch('https://friendfinderalexeylebed.herokuapp.com/addcharacter', {
+            method : 'POST',
+            body: data,
+            //mode: 'no-cors',
+            headers: {  
+               "content-type" : "application/json",
+            }
+        })
+        .then(result => {
+            return result.text();
+            
+        })  
+        .then((text) => {
+            block3.style.display = 'block'
+            pageHeader.innerHTML = 'Thank you for your answers!'
+            bestFriend.innerHTML = 'Your best friend is ' + JSON.parse(text).name;
+            let imgsrc = JSON.parse(text).photo;
+            renderPhotos(imgsrc);
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+    }
+
+    function run(){
+        if(questionIndex < questionsMaxIndex){
+            render();
+            getAnswer();
+            checkBoxClear();
+        } else {
+            getAnswer();
+            block1.style.display = 'none'
+            block2.style.display = 'none'
+            getBestFriend(userAnswers);
+        }
+    }
+    //Start ovr the survey button
+    let reloadButton = document.getElementById('back');
+    reloadButton.addEventListener('click' , ()=>{
+        window.location.reload();
+    })
+
+</script>
+</html>
